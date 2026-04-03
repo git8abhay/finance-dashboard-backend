@@ -12,5 +12,15 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  backend-api:
+    build: .
+    container_name: finance_backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/finance_dashboard
+
 volumes:
   postgres_data:
